@@ -1,11 +1,17 @@
+const winston = require('winston');
+const colors = require('colors');
+winston.add(new winston.transports.Console({
+    level: 'debug',
+    format: winston.format.combine(winston.format.timestamp(), winston.format.cli(), winston.format.colorize())
+}));
 const path = require('path');
-const sqlite = require('sqlite');
-const Commando = require('discord.js-commando');
-const client = new Commando.Client({
-    commandPrefix: '%',
+const SequelizeProvider = require('./providers/Sequelize');
+const RyanbotClient = require('./RyanbotClient');
+winston.info("Starting bot!".cyan);
+const client = new RyanbotClient({
+    commandPrefix: process.env.BOT_PREFIX,
     owner: process.env.CREATOR_ID
 });
-require("./clientFunctions.js")(client);
 
 client.registerEvents().then(() => {
     client.registry
@@ -14,7 +20,7 @@ client.registerEvents().then(() => {
 });
 
 /**
-fs.readdir("./events/", (err, files) => {
+ fs.readdir("./events/", (err, files) => {
     if(err) return console.error(err);
     files.forEach(file => {
         const event = require(`./events/${file}`);
@@ -25,10 +31,10 @@ fs.readdir("./events/", (err, files) => {
     });
 });
 
-client.commands-old = new Discord.Collection();
-client.aliases = new Discord.Collection();
+ client.commands-old = new Discord.Collection();
+ client.aliases = new Discord.Collection();
 
-fs.readdir("./commands-old/", (err, files) => {
+ fs.readdir("./commands-old/", (err, files) => {
     if (err) return console.error(err);
     files.forEach(file => {
         if (!file.endsWith(".js")) return;
@@ -43,9 +49,8 @@ fs.readdir("./commands-old/", (err, files) => {
 });
  */
 
-
 /*client.setProvider(
     sqlite.open(path.join(__dirname, 'db/settings.sqlite3')).then(db => new Commando.SQLiteProvider(db))
 ).catch(console.error);*/
-
+client.setProvider(new SequelizeProvider(client.database));
 client.login(process.env.BOT_TOKEN);

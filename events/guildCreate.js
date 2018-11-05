@@ -1,3 +1,4 @@
+const winston = require('winston');
 module.exports = (client, guild) => {
-    console.log(`Joined guild "${guild.name}!"`);
+    winston.info(`Joined guild "${guild.name}!"`);
 };

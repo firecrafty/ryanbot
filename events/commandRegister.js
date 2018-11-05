@@ -1,3 +1,4 @@
+const winston = require('winston');
 module.exports = (client, command, registry) => {
-    console.log(`Command '${command.name}' registered successfully!`);
+    winston.debug(`Command '${command.name}' registered successfully!`);
 }

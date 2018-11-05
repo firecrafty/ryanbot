@@ -1,3 +1,4 @@
+const winston = require('winston');
 module.exports = (client, group, registry) => {
-    console.log(`Group '${group.id}' registered successfully!`);
+    winston.debug(`Group '${group.id}' registered successfully!`);
 };
