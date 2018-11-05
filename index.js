@@ -1,11 +1,9 @@
-const config = require("./config.json");
 const path = require('path');
 const sqlite = require('sqlite');
 const Commando = require('discord.js-commando');
 const client = new Commando.Client({
     owner: process.env.CREATOR_ID
 });
-client.config = config;
 require("./clientFunctions.js")(client);
 
 client.registerEvents().then(() => {
