@@ -19,4 +19,4 @@ module.exports = class UptimeCommand extends Command {
         let seconds = totalSeconds % 60;
         return msg.reply(`${this.client.user.username} has been running for ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds.`);
     }
-}
+};

@@ -44,8 +44,8 @@ fs.readdir("./commands-old/", (err, files) => {
  */
 
 
-client.setProvider(
+/*client.setProvider(
     sqlite.open(path.join(__dirname, 'db/settings.sqlite3')).then(db => new Commando.SQLiteProvider(db))
-).catch(console.error);
+).catch(console.error);*/
 
 client.login(process.env.BOT_TOKEN);
