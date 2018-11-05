@@ -2,6 +2,7 @@ const path = require('path');
 const sqlite = require('sqlite');
 const Commando = require('discord.js-commando');
 const client = new Commando.Client({
+    commandPrefix: '%',
     owner: process.env.CREATOR_ID
 });
 require("./clientFunctions.js")(client);
