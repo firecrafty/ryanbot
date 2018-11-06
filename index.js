@@ -6,6 +6,7 @@ winston.add(new winston.transports.Console({
 }));
 const path = require('path');
 const SequelizeProvider = require('./providers/Sequelize');
+const SettingsOperationType = require('./types/SettingsOperationType');
 const RyanbotClient = require('./RyanbotClient');
 winston.info("Starting bot!".cyan);
 const client = new RyanbotClient({
@@ -16,6 +17,7 @@ const client = new RyanbotClient({
 client.registerEvents().then(() => {
     client.registry
         .registerDefaults()
+        .registerTypesIn(path.join(__dirname, 'types'))
         .registerCommandsIn(path.join(__dirname, 'commands'));
 });
 

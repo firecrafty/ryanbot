@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const {Command} = require('discord.js-commando');
 
 module.exports = class MuteCommand extends Command {
     constructor(client) {
@@ -9,9 +9,9 @@ module.exports = class MuteCommand extends Command {
             description: 'Mutes a user',
             args: [
                 {
-                    key: 'users',
+                    key: 'user',
                     prompt: 'Who do you want to mute?',
-                    type: 'user|member'
+                    type: 'member'
                 },
                 {
                     key: 'reason',
@@ -25,8 +25,15 @@ module.exports = class MuteCommand extends Command {
 
     }
 
-    run(message, {users, reason}) {
-
+    run(message, {user, reason}) {
+        message.guild.channels.forEach((channel => {
+            if (channel.type == 'text') {
+                channel.overwritePermissions(user, {
+                    SEND_MESSAGES: false,
+                    ADD_REACTIONS: false
+                });
+            }
+        }));
     }
 
 };

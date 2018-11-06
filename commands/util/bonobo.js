@@ -6,8 +6,8 @@ module.exports = class BonoboCommand extends Command {
             name: 'bonobo',
             group: 'util',
             memberName: 'bonobo',
-            description: 'Calls jackson a bonobo',
-
+            description: 'Calls Jackson a bonobo',
+            guildOnly: true
         })
     }
     run(msg) {

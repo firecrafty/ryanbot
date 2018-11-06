@@ -48,7 +48,7 @@ module.exports = class SequelizeProvider extends SettingProvider {
                 primaryKey: true
             },
             settings: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             }
         });
 
@@ -138,7 +138,7 @@ module.exports = class SequelizeProvider extends SettingProvider {
         settings[key] = val;
 
         await this.model.upsert(
-            {guild: (guild !== 'global') ? guild : 0, settings: JSON.stringify(settings)},
+            {guild: (guild !== 'global') ? guild : 0 + "", settings: JSON.stringify(settings)},
             {where: {guild: (guild !== 'global') ? guild : 0}});
 
         if (guild === 'global') {
