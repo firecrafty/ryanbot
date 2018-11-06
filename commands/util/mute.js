@@ -34,6 +34,17 @@ module.exports = class MuteCommand extends Command {
                 });
             }
         }));
+        var mute = new Discord.RichEmbed()
+            .setTitle('User was muted.')
+            .addField('User', user, true)
+            .addField('Muted by', message.author, true)
+            .addField('Reason', reason)
+            .setFooter("MUTED")
+            .setTimestamp()
+            .setColor([255, Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)])
+        message.channel.send({
+            embed: mute
+        });
     }
 
 };

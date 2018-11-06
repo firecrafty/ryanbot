@@ -15,9 +15,9 @@ module.exports = class KillCommand extends Command {
         const sentMessage = await message.channel.send(`${message.author} => Are you sure you want to kill the bot?`);
         const white_check_react = await sentMessage.react("✅");
         const red_x = await sentMessage.react("❌");
+
         const collector = sentMessage.createReactionCollector((m, u) => u.id === message.author.id,
             {time: 10000});
-
         collector.on('collect', (m, u) => {
             if(m.emoji === white_check_react.emoji) {
                 collector.stop();
@@ -31,18 +31,25 @@ module.exports = class KillCommand extends Command {
             if(r === "time") this.timeout(sentMessage, message.author);
         });
     }
+
+    async actionPerformed(message) {
+        if(message.channel.type !== 'dm') {
+            await message.clearReactions();
+        }
+    }
+
     async kill(message, user) {
-        await message.clearReactions();
+        this.actionPerformed(message);
         await message.edit(`${user} => Killing all bot processes...`);
         await this.client.user.setStatus("invisible");
         process.exit(0);
     }
     async cancel(message, user) {
-        message.clearReactions();
+        this.actionPerformed(message);
         message.edit(`${user} => Cancelled!`);
     }
     async timeout(message, user) {
-        message.clearReactions();
+        this.actionPerformed(message);
         message.edit(`${user} => You didn't respond in time!`);
     }
 };

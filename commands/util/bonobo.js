@@ -15,6 +15,11 @@ module.exports = class BonoboCommand extends Command {
         })
     }
     run(msg) {
-        return msg.channel.send("<@220654054177636352> is a bonobo");
+        let toSend = "Jackson is a bonobo"
+        if(this.client.isOwner(msg.author)) {
+            toSend = "<@220654054177636352> is a bonobo"
+        }
+        msg.delete();
+        return msg.channel.send(toSend);
     }
 }
