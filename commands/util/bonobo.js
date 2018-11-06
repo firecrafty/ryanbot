@@ -7,7 +7,11 @@ module.exports = class BonoboCommand extends Command {
             group: 'util',
             memberName: 'bonobo',
             description: 'Calls Jackson a bonobo',
-            guildOnly: true
+            guildOnly: true,
+            throttling: {
+                usages: 1,
+                duration: 600
+            }
         })
     }
     run(msg) {
