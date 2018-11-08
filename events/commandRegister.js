@@ -1,4 +1,4 @@
 const winston = require('winston');
 module.exports = (client, command, registry) => {
-    winston.debug(`Command '${command.name}' registered successfully!`);
+    winston.debug(`[REGISTRATION]: Command '${command.name}' registered successfully!`);
 }

@@ -13,10 +13,13 @@ const client = new RyanbotClient({
     commandPrefix: process.env.BOT_PREFIX,
     owner: process.env.CREATOR_ID
 });
-
+winston.info("[REGISTRATION]: Registering functions...")
 client.registerEvents().then(() => {
     client.registry
         .registerDefaults()
+        .registerGroups([
+            { id: 'admin', name: 'Administration'}
+        ])
         .registerTypesIn(path.join(__dirname, 'types'))
         .registerCommandsIn(path.join(__dirname, 'commands'));
 });
@@ -55,4 +58,5 @@ client.registerEvents().then(() => {
     sqlite.open(path.join(__dirname, 'db/settings.sqlite3')).then(db => new Commando.SQLiteProvider(db))
 ).catch(console.error);*/
 client.setProvider(new SequelizeProvider(client.database));
-client.login(process.env.BOT_TOKEN);
+winston.info("[LOGIN]: Starting log in...");
+client.login(process.env.BOT_TOKEN).then(() => winston.info("[LOGIN]: Login successful!"));

@@ -4,7 +4,7 @@ module.exports = class MuteCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'mute',
-            group: 'util',
+            group: 'admin',
             memberName: 'mute',
             description: 'Mutes a user',
             args: [
