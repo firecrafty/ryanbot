@@ -1,4 +1,4 @@
 const winston = require('winston');
 module.exports = (client, type, registry) => {
-    winston.debug(`Argument type '${type.id}' registered successfully!`);
+    winston.debug(`[REGISTRATION]: Argument type '${type.id}' registered successfully!`);
 }

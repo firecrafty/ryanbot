@@ -17,7 +17,7 @@ class RyanbotClient extends CommandoClient {
                 const event = require(`./events/${file}`);
                 let eventName = file.split(".")[0];
                 this.on(eventName, event.bind(null, this));
-                winston.debug(`Event '${eventName}' registered successfully from file '${file}'!`);
+                winston.debug(`[REGISTRATION]: Event '${eventName}' registered successfully from file '${file}'!`);
             });
         }).catch((err) => {
             console.error(err);
