@@ -1,12 +1,11 @@
-const winston = require('winston');
 const {RichEmbed} = require('discord.js');
 const {getLoggingChannelOfGuild} = require('../logSettingsHelper');
 module.exports = async (client, guildBefore, guildAfter) => {
-    let channel = await getLoggingChannelOfGuild(guildAfter);
-    if (!channel) {
-        return;
-    }
-    if (client.provider.get(guildAfter, "loggingEnabled", false)) {
+    if (guildAfter.settings.get("loggingEnabled", false)) {
+        let channel = await getLoggingChannelOfGuild(guildAfter);
+        if (!channel) {
+            return;
+        }
         let embed = new RichEmbed()
             .setTitle(`Guild Updated - ${guildAfter.name}`)
             .setColor('GOLD')
