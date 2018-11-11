@@ -1,4 +1,5 @@
-const {Command} = require('discord.js-commando');
+const { Command } = require('discord.js-commando');
+const { RichEmbed } = require('discord.js');
 
 module.exports = class MuteCommand extends Command {
     constructor(client) {
@@ -34,7 +35,7 @@ module.exports = class MuteCommand extends Command {
                 });
             }
         }));
-        var mute = new Discord.RichEmbed()
+        var mute = new RichEmbed()
             .setTitle('User was muted.')
             .addField('User', user, true)
             .addField('Muted by', message.author, true)
