@@ -1,3 +1,4 @@
+const winston = require('winston');
 const {Command} =  require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
 module.exports = class SettingsCommand extends Command {
@@ -37,7 +38,6 @@ module.exports = class SettingsCommand extends Command {
     }
 
     async run(msg, {key, value, operation, global}) {
-        console.log(operation);
         const settings = this.client.provider;
         let guild = msg.guild;
         if(msg.channel.type === 'dm' || global) {
@@ -60,6 +60,7 @@ module.exports = class SettingsCommand extends Command {
             await settings.remove(guild, key);
             reply.setFooter("REMOVED SUCCESSFULLY");
         }
-        msg.channel.send(reply);
+        
+        return msg.channel.send(reply);
     }
 };
